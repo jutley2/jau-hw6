@@ -1,5 +1,3 @@
-#yup
-#
 # Jennifer Utley
 # jau100020@utdallas.edu
 # SE 3377.501
@@ -18,12 +16,12 @@ OBJS = prog6.o
 all: $(EXECFILE)
 
 clean:
-	rm -f $(OBJS) $(EXECFILE) *.P *~ \#*
+	@rm -f $(OBJS) $(EXECFILE) *.P *~ \#*
 	@echo Removed unnecessary files.
 
 
 $(EXECFILE): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(LDLIBS)
+	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(LDLIBS)
 	@echo Created the $(EXECFILE) executable.
 
 # Backup Target
