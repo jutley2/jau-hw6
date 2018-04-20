@@ -4,7 +4,7 @@
 # Makefile for program 6
 
 CXX = g++
-CXXFLAGS = -Wall
+CXXFLAGS = -Wall -g
 CPPFLAGS = -Wall -g -I /scratch/perkins/include
 LDFLAGS = -L /scratch/perkins/lib
 LDLIBS = -l cdk -l curses
