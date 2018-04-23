@@ -43,6 +43,11 @@ public:
 int main ()
 {
 
+  //opening the binary file for input
+  ifstream binInfile ("cs3377.bin", ios::in | ios::binary);
+
+if (binInfile.is_open()) //checking if file opened properly
+{
   //setting up the matrix
   WINDOW    *window;
   CDKSCREEN *cdkscreen;
@@ -69,7 +74,7 @@ int main ()
     {
       printf("Error creating Matrix\n");
       exit(1);
-      }
+    }
   
   //draw the matrix
   drawCDKMatrix(myMatrix, true);
@@ -79,12 +84,9 @@ int main ()
   BinaryFileHeader *headerRecord = new BinaryFileHeader();
   BinaryFileRecord *dataRecord = new BinaryFileRecord();
 
-  //opening the binary file for input
-  ifstream binInfile ("cs3377.bin", ios::in | ios::binary);
-
-  //reading headerRecord
+   //reading headerRecord
   binInfile.read((char *) headerRecord, sizeof(BinaryFileHeader));
-
+  
   //holding these values in variables
   uint32_t magNum = headerRecord->magicNumber;
   uint32_t verNum = headerRecord->versionNumber;
@@ -94,7 +96,7 @@ int main ()
   ostringstream convert;
   ostringstream convert2;
   ostringstream convert3;
-  convert << magNum;
+  convert << hex << magNum;
   string magic = "Magic: " + convert.str();
   convert2 << verNum;
   string version = "Version: " + convert2.str();
@@ -134,9 +136,17 @@ int main ()
   //now draw the matrix with the cells filled with contents from binary file
   drawCDKMatrix(myMatrix, true);
 
-  //pause to view contents then close
-  sleep (10);
+  //wait for user input to quit program
+  unsigned char x;
+  cin >> x;
   endCDK();
+}
+
+  else //catching file open failure
+   {
+      cout << "Failed to open specified file--ending process." << endl;
+      exit(0);
+   }
 
 }
   
